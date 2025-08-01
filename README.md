@@ -1,7 +1,7 @@
-# Projetdo Omnis - Website de seguros com cotação rápida
-
-Omnis foi um website de seguros desenvolvido durante as aulas de Python do curso Transfero Academy 2025. No website é possível fazer uma cotação rápida de seguros, e o sistema calcula o valor do seguro de acordo com os dados fornecidos.
-
+# Projeto Omnis  
+- O Omnis foi um website de seguros desenvolvido durante as aulas de Python do curso Transfero Academy 2025. No website é possível fazer uma cotação rápida de seguros, e o sistema calcula o valor do seguro de acordo com os dados fornecidos.
+  
+![Tela inicial](https://github.com/Roberto-Lourenco/django_projeto_omnis/blob/main/website_preview/home_preview_hero.png)
 ---
 
 ## Tecnologias Utilizadas
