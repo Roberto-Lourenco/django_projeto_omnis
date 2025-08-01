@@ -1,0 +1,36 @@
+{% extends 'global/base.html' %}
+
+{% block title %}Lista de Clientes{% endblock %}
+
+{% block main %}
+<main>
+<div class="row">
+    <div class="col">
+        <h2>Clientes</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.usuario.nome_completo }}</td>
+                    <td>{{ cliente.usuario.tipo_usuario }}</td>
+                    <td>{{ cliente.get_tipo_display }}</td>
+                    <td>
+                        <a href="{% url 'usuarios:editar_cliente' cliente.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'usuarios:criar_cliente' %}" class="btn btn-success">Novo Cliente</a>
+    </div>
+</div>
+</main>
+{% endblock main %}

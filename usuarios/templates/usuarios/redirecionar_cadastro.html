@@ -1,0 +1,44 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% block title %}Cadastro{% endblock %}
+{% block main %}
+
+<link rel="stylesheet" href="{% static 'css/usuarios/redirecionar_cadastro.css' %}" />
+
+<main>
+  <section class="py-5 d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+    <div class="container bg-white py-5 px-4 px-md-5 rounded-4 shadow conteudo_login">
+      <div class="row mb-5">
+        <div class="col-12 text-center">
+          <h2 class="display-5 fw-bold">Como você deseja se cadastrar?</h2>
+          <p class="text-muted fs-5">Escolha a opção que melhor representa você ou sua empresa.</p>
+        </div>
+      </div>
+
+      <div class="row justify-content-center gap-4">
+        <!-- Card Pessoa Física -->
+        <div class="col-12 col-md-5 d-flex justify-content-center">
+          <a href="{% url 'usuarios:cadastro_pf' %}" class="text-decoration-none text-dark">
+            <div class="card card-cadastro text-center align-items-center p-5">
+              <img src="{% static 'img/worker.png' %}" alt="Ícone Pessoa Física" class="cadastro-icon">
+              <h4 class="mb-3">Pessoa Física</h4>
+              <p>Ideal para motoristas individuais que buscam segurança e praticidade na proteção do seu veículo.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Card Pessoa Jurídica -->
+        <div class="col-12 col-md-5">
+          <a href="{% url 'usuarios:cadastro_pj' %}" class="text-decoration-none text-dark">
+            <div class="card card-cadastro text-center align-items-center p-5">
+              <img src="{% static 'img/bussinesman.png' %}" alt="Ícone Pessoa Jurídica" class="cadastro-icon">
+              <h4 class="mb-3">Pessoa Jurídica</h4>
+              <p>Perfeito para empresas que desejam proteger sua frota com um plano feito sob medida.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock main %}

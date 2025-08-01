@@ -1,0 +1,138 @@
+@import url(styles.css);
+@import url(footerHeader.css);
+
+/* CTA */
+.cta {
+    padding: 40px 0;
+    border-radius: 10px;
+  }
+  
+  .cta-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .cta-header h2 {
+    font-size: 2.5rem;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .cta-header p {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+  }
+  
+  .cta-body {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    min-height: 400px;
+  }
+  
+  .sac-tel, .sac-whatsapp {
+    min-height: 350px;
+    border-radius: 8px;
+    padding: 25px;
+    border: 1px solid #8888885d;
+  }
+
+  .sac-whatsapp{
+    text-align: center;
+  }
+  
+  .sac-tel h4, .sac-whatsapp h4 {
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+  }
+
+  .sac-tel h5{
+    color: var(--text-dark);
+    font-size: 1.5rem;
+  }
+  .sac-tel a{
+    color: var(--text-dark);
+  }
+  
+  .sac-tel p, .sac-whatsapp p {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+  }
+
+
+  
+  .sac-tel ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sac-tel li {
+    font-size: 1rem;
+    color: var(--text-dark);
+
+  }
+  
+  .sac-whatsapp .btn {
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+  
+  .sac-whatsapp .btn i {
+    margin-right: 10px;
+  }
+  
+  .sac-whatsapp .btn:hover {
+    background-color: var(--secondary-color-hover);
+    transition: background-color 0.3s ease;
+  }
+  
+  @media (min-width: 768px) {
+    .cta-body {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+  
+    .sac-tel, .sac-whatsapp {
+      width: 48%;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .cta-header h2 {
+      font-size: 2rem;
+    }
+  
+    .cta-header p {
+      font-size: 1rem;
+    }
+  
+    .sac-tel, .sac-whatsapp {
+      padding: 20px;
+    }
+  }
+
+  @media print {
+    header{
+        display: none;
+    }
+    footer{
+        display: none;
+    }
+
+    .sac-whatsapp{
+        display: none;
+    }
+  }
+  

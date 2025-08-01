@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumo da Cotação</title>
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 12px;
+            color: #333;
+            margin: 40px;
+        }
+
+        h1 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            border: 1px solid #aaa;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        .contato {
+            font-size: 12px;
+            margin-top: 40px;
+        }
+
+        .contato p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Resumo da Cotação</h1>
+
+    <table>
+        <tr>
+            <th>Nome</th>
+            <td>{{ cotacao.nome_completo }}</td>
+        </tr>
+        <tr>
+            <th>CPF</th>
+            <td>{{ cotacao.cpf }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ cotacao.email }}</td>
+        </tr>
+        <tr>
+            <th>Telefone</th>
+            <td>{{ cotacao.telefone }}</td>
+        </tr>
+        <tr>
+            <th>Veículo</th>
+            <td>{{ cotacao.marca }} {{ cotacao.modelo }} ({{ cotacao.ano_modelo }})</td>
+        </tr>
+        <tr>
+            <th>Valor FIPE</th>
+            <td>R$ {{ cotacao.valor_fipe|floatformat:2 }}</td>
+        </tr>
+        <tr>
+            <th>Categoria</th>
+            <td>{{ cotacao.categoria }}</td>
+        </tr>
+        <tr>
+            <th>Plano Escolhido</th>
+            <td>{{ cotacao.plano.nome }}</td>
+        </tr>
+        <tr>
+            <th>Valor Final do Seguro</th>
+            <td>R$ {{ cotacao.valor_final|floatformat:2 }}</td>
+        </tr>
+    </table>
+
+    <div class="contato">
+        <p><strong>Entre em contato conosco:</strong></p>
+        <p>📞 Telefone: (11) 1234-5678</p>
+        <p>📧 E-mail: atendimento@omnis.com.br</p>
+        <p>🌐 Site: www.omnis.com.br</p>
+    </div>
+
+</body>
+</html>

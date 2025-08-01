@@ -1,0 +1,38 @@
+  .card-cadastro {
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(145deg, #ffffff, #f3f3f3);
+  }
+
+  .card-cadastro:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-cadastro h4 {
+    font-weight: 700;
+    color: #333;
+  }
+
+  .card-cadastro p {
+    color: #666;
+    font-size: 0.95rem;
+  }
+
+  .cadastro-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  .card-cadastro:hover .cadastro-icon {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    .card-cadastro {
+      margin-bottom: 2rem;
+    }
+  }

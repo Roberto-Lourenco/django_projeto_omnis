@@ -1,0 +1,86 @@
+{% extends "global/base.html" %}
+{% block main %}
+{% load static %}
+{% comment %} CSS {% endcomment %}
+<link rel="stylesheet" href="{% static 'css/contato.css' %}"/>
+
+<main>
+  <div class="container d-flex flex-column gap-1">
+    <!-- Seção de Contato -->
+    <section class="contatos w-100">
+      <header class="mb-4">
+        <h1 class="title-contatos">Entre em Contato</h1>
+        <p class="lead">Estamos disponíveis para atender você. Fale conosco pelos nossos canais oficiais.</p>
+      </header>
+  
+      <div class="row">
+        <!-- Informações de Contato -->
+        <article class="col-md-6 my-3 sac">
+          <h4>Central de Atendimento</h4>
+          <p><a href="tel:+40028922"><strong>4002 8922</strong></a>: Capitais e regiões metropolitanas.</p>
+          <p><a href="tel:+08001012222"><strong>0800 101 2222</strong></a>: Demais localidades.</p>
+          <p><a href="tel:+08001024444"><strong>0800 102 4444</strong></a>: Pessoas com deficiência auditiva e de fala.</p>
+  
+          <h5 class="mt-3">Horário de Atendimento</h5>
+          <ul class="list-unstyled">
+            <li><strong>Emergência:</strong> Assistência e Suporte 24 horas por dia.</li>
+            <li><strong>SAC e Atendimento sem emergência:</strong></li>
+            <ul>
+              <li><strong>Segunda a Sexta:</strong> 09:00 - 18:00</li>
+              <li><strong>Sábado:</strong> 09:00 - 13:00</li>
+              <li><strong>Domingo:</strong> Fechado</li>
+            </ul>
+          </ul>
+        </article>
+  
+        <!-- Atendimento via WhatsApp -->
+        <article class="col-md-6 my-3">
+          <h4>Atendimento via WhatsApp</h4>
+          <p>Converse conosco diretamente pelo WhatsApp para um atendimento rápido e personalizado.</p>
+          <div class="whatsapp-link my-4">
+            <a href="https://wa.me/5521999999999" class="btn-whatsapp " target="_blank">
+              <i class="fab fa-whatsapp"></i> Conversar pelo WhatsApp
+            </a>
+          </div>
+          
+        </article>
+      </div>
+    </section>
+  
+    <!-- Seção de Localização -->
+    <section class="localizacao w-100">
+      <header class="mb-4">
+        <h2 class="display-6">Nossa Localização</h2>
+        <p class="lead">Visite nosso escritório para um atendimento presencial.</p>
+      </header>
+  
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.2633222822856!2d-43.45324822469414!3d-22.75560707936185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9967a99225f96f%3A0xec20bfc8ff090b46!2sSenac%20Nova%20Igua%C3%A7u!5e0!3m2!1spt-BR!2sbr!4v1741579448806!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+    <!-- Redes Sociais -->
+    <section class="redes-sociais w-100 text-center">
+      <h2 class="display-6">Nos siga nas redes sociais</h2>
+      <nav>
+        <ul class="list-unstyled d-flex justify-content-center gap-3 mt-3">
+          <li><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+          <li><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i> Instagram</a></li>
+          <li><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+        </ul>
+      </nav>
+    </section>
+  
+    <!-- Seção de Newsletter -->
+    <section class="newsletter w-100 bg-light text-center py-5">
+      <header class="mb-4">
+        <h2 class="display-6">Assine Nossa Newsletter</h2>
+        <p class="lead">Receba novidades e promoções exclusivas diretamente no seu e-mail.</p>
+      </header>
+  
+      <form action="#" method="POST" class="d-flex justify-content-center">
+        <input type="email" class="form-control" placeholder="Digite seu e-mail" required>
+        <button type="submit" class="btn-newsletter">Assinar</button>
+      </form>
+    </section>
+  </div>
+</main>
+{% endblock main %}

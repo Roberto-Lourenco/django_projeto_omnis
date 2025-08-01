@@ -1,0 +1,155 @@
+{% extends 'global/base.html' %}
+{% load widget_tweaks %}
+{% block title %}Cadastro Pessoa Jurídica{% endblock %}
+{% block main %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/usuarios/login.css' %}" />
+  <main>
+    <section class="py-3 py-md-5 py-xl-8">
+        <div class="container bg-white py-5 conteudo_login">
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-5 header_login">
+                        <h2 class="display-5 fw-bold text-center">Cadastro Pessoa Jurídica</h2>
+                        <p class="text-center m-0">
+                            Já tem uma conta? <a href="{% url 'usuarios:login' %}">Entrar</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8">
+                    <form id="cadastro-form" method="post" novalidate>
+                        {% csrf_token %}
+                        <div class="row gy-4">
+                            {% for field in form.visible_fields %}
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ field|add_class:"form-control"|attr:"placeholder " }}
+                                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                        {% if field.errors %}<div class="text-danger small">{{ field.errors|join:", " }}</div>{% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <div class="col-12 mt-3 d-flex justify-content-center ">
+                                <div class="col-6 d-flex justify-content-center ">
+                                    <button type="submit" class="btn btn-success btn-lg">Cadastrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+  </main>
+
+    {% comment %} JS  {% endcomment %}
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('cadastro-form');
+  const email = form.querySelector('input[name="email"]');
+  const nome = form.querySelector('input[name="nome_completo"]');
+  const telefone = form.querySelector('input[name="telefone"]');
+  const cpf = form.querySelector('input[name="cpf"]');
+  const dataNascimento = form.querySelector('input[name="data_nascimento"]');
+  const senha1 = form.querySelector('input[name="password1"]');
+  const senha2 = form.querySelector('input[name="password2"]');
+  const nome_da_mae = form.querySelector('input[name="nome_mae"]');
+  const telefoneInput = telefone;
+
+  // Função para formatar telefone enquanto digita
+  function formatarTelefone(value) {
+    value = value.replace(/\D/g, '');
+
+    if (value.length > 11) {
+      value = value.slice(0, 11);
+    }
+
+    if (value.length > 6) {
+      return `(${value.slice(0,2)}) ${value.slice(2,7)}-${value.slice(7)}`;
+    } else if (value.length > 2) {
+      return `(${value.slice(0,2)}) ${value.slice(2)}`;
+    } else if (value.length > 0) {
+      return `(${value}`;
+    }
+    return '';
+  }
+
+  telefoneInput.addEventListener('input', function(e) {
+    const cursorPos = telefoneInput.selectionStart;
+    const beforeLength = telefoneInput.value.length;
+
+    telefoneInput.value = formatarTelefone(telefoneInput.value);
+
+    const afterLength = telefoneInput.value.length;
+    const diff = afterLength - beforeLength;
+    telefoneInput.selectionEnd = cursorPos + diff;
+  });
+
+  form.addEventListener('submit', function(event) {
+    // Remove mensagens de erro anteriores
+    const errorMessages = form.querySelectorAll('.text-danger');
+    errorMessages.forEach(e => e.remove());
+
+    let valid = true;
+
+    function showError(field, message) {
+      const error = document.createElement('div');
+      error.className = 'text-danger small mt-1';
+      error.textContent = message;
+      field.parentNode.appendChild(error);
+      valid = false;
+    }
+
+    // Validações
+    if (!email.value.trim()) {
+      showError(email, 'Email é obrigatório.');
+    } else if (!/^\S+@\S+\.\S+$/.test(email.value.trim())) {
+      showError(email, 'Email inválido.');
+    }
+
+    if (!nome.value.trim()) {
+      showError(nome, 'Nome completo é obrigatório.');
+    }
+
+    if (!nome_da_mae.value.trim()) {
+      showError(nome_da_mae, 'Nome da mãe é obrigatório.');
+    }
+
+    if (!telefone.value.trim()) {
+      showError(telefone, 'Telefone é obrigatório.');
+    }
+
+    if (!cpf.value.trim()) {
+      showError(cpf, 'CPF é obrigatório.');
+    }
+
+    if (!dataNascimento.value) {
+      showError(dataNascimento, 'Data de nascimento é obrigatória.');
+    }
+
+    if (!senha1.value) {
+      showError(senha1, 'Senha é obrigatória.');
+    }
+
+    if (!senha2.value) {
+      showError(senha2, 'Confirmação de senha é obrigatória.');
+    }
+
+    if (senha1.value && senha2.value && senha1.value !== senha2.value) {
+      showError(senha2, 'As senhas não coincidem.');
+    }
+
+    if (!valid) {
+      event.preventDefault();
+    } else {
+      // Limpa o telefone para enviar só números
+      telefoneInput.value = telefoneInput.value.replace(/\D/g, '');
+    }
+  });
+});
+</script>
+
+
+{% endblock main %}

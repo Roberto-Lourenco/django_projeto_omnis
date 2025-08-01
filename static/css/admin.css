@@ -1,0 +1,37 @@
+/* Header */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+*{
+    font-family: "Montserrat", sans-serif;
+}
+#header{
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    background: #118bc7;
+    color: #ffffff;
+}
+
+
+
+
+/* H1 */
+#site-name a:link, #site-name a:visited{
+    color: #fff;
+    font-weight:600
+}
+
+/* Links menu */
+#user-tools, #logout-form button{
+    font-weight: 400;
+    display: flex;
+}
+
+@media(max-width:1024px){
+    #header {
+    align-items: start;
+}
+}

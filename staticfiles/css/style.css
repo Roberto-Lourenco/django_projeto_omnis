@@ -1,0 +1,288 @@
+/* Styles globais */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+/*========== Reset ==========*/
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+/*========== Variáveis globais ==========*/
+:root {
+  --bg-white: #f3f3f3;
+  --text-dark: #211e22;
+  --bg-dark: #000508;
+  --text-light: #fcfcfc;
+  --primary-color: #2073b3;
+  --primary-color-hover: #2188c2;
+  --secondary-color: #01a833;
+  --secondary-color-hover: #0cc543;
+}
+
+body {
+  background: var(--bg-white);
+}
+
+/*========== Botões reutilizáveis ==========*/
+.btn-contact,
+.btn-learn-more,
+.btn-submit {
+    border-radius: 10px;
+    padding: 8px;
+    border: 1px solid #88888850;
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: 22px;
+    transition: background-color .2s ease-in-out;
+}
+
+.btn-learn-more {
+    background-color: var(--primary-color);
+}
+
+.btn-contact {
+    background-color: var(--secondary-color);
+}
+
+.btn-learn-more:hover {
+    background-color: var(--primary-color-hover);
+}
+
+.btn-contact:hover {
+    background-color: var(--secondary-color-hover);
+}
+
+/* Aumentar a especificidade pois está dando conflito com o boostrap */
+.btn-submit.btn-submit {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    font-size: 18px;
+}
+
+.btn-submit.btn-submit:hover {
+    background-color: var(--primary-color-hover);
+    color: var(--text-light);
+}
+/* Fim especificidade */
+
+.btn-cotacao{
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  padding: 12px;
+  text-align: center;
+  font-weight: 500;
+  border-radius: 10px;
+  font-size: 20px;
+  transition: background-color .3s ease-in-out;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.322);
+}
+.btn-cotacao:hover{
+  background-color: var(--primary-color-hover);
+  color: var(--text-light);
+}
+
+/*========== Header ==========*/
+  /*===== Container NAV Boostrap =====*/
+.nav-container {
+  background-color: #fff;
+    border-bottom: 1px solid #8888885f;
+    padding: 10px 10%;
+    box-shadow: 0 2px 4px #8888885f;
+  }
+
+  /*===== Menu-hamburguer =====*/
+  .navbar-toggler {
+    border: none;
+    color: var(--text-dark);
+    font-size: 28px;
+  }
+  
+  .navbar-toggler:focus {
+    border: none;
+    box-shadow: none;
+  }
+  .navbar-toggler[aria-expanded="true"]{
+    border: 2px solid var(--primary-color-hover);
+    color: var(--primary-color-hover);
+    border-radius: 12px;
+  }
+  
+  
+  
+  /*===== Nav =====*/
+  .navbar-nav {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: end;
+    gap: 24px;
+    a {
+      position: relative;
+      padding-bottom: 5px;
+      font-size: 18px;
+      font-weight: 500;
+    }
+    a:hover {
+      color: var(--primary-color);
+    }
+    a:not([aria-current="page"])::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 3px;
+      background-color: var(--primary-color);
+      transition: width 0.3s ease-in-out;
+    }
+    a:hover::after {
+      width: 100%;
+    }
+  }
+
+  .navbar-nav a[aria-current="page"]{
+    color: var(--primary-color-hover);
+    font-weight: 600;
+  }
+  
+  .navbar-brand img {
+    width: 168px;
+    height: 56px;
+    transition: transform 0.3s;
+  }
+  .navbar-brand img:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-cotacao-header{
+    font-size: 1.2rem;
+    font-weight: 500;
+    border-radius: 22px;
+    color: var(--text-light);
+    background-color: var(--primary-color);
+    padding: 6px 15px;
+    border: none;
+    transition: background-color .3s;
+    white-space: nowrap;
+  }
+  .btn-cotacao-header:hover{
+    background-color: var(--primary-color-hover);
+  }
+
+
+/*========== Footer ==========*/
+.footer {
+  background-color: #fff;
+  color: var(--text-dark);
+  font-family: Arial, sans-serif;
+  padding: 20px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.11);
+  margin-top: 5vh;
+}
+
+.footer ul li{
+  list-style-type: none;
+}
+
+.footer-info {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.footer-container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-column {
+  flex: 1;
+  max-width: 400px;
+  margin: 20px 50px;
+  text-align: left;
+}
+
+.footer-column h6 {
+  font-size: 18px;
+  padding-bottom: 8px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #065fd380;
+}
+
+.footer-column hr {
+  background-color: var(--primary-color);
+  height: 2px;
+  margin-bottom: 20px;
+}
+
+.footer-column p {
+  margin: 5px 0;
+}
+
+.footer-column a {
+  text-decoration: none;
+  color: var(--text-dark);
+}
+
+.footer-column a:hover {
+  color: var(--primary-color-hover);
+}
+
+.footer-copyright {
+  text-align: center;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+/*========== Media queries ==========*/
+@media (max-width: 992px) {
+  .nav-container {
+    padding: 10px 20px;
+  }
+  .navbar-brand{
+    width: 50%;
+  }
+  .navbar-brand img {
+    width: min(142px, 100%);
+    height: auto;
+  }
+   .footer-container{
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .footer-column{
+    min-width: 80%;
+  }
+}
+@media (max-width:768px){
+
+  .nav-container{
+    border-bottom: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.11);
+  }
+  #header-top {
+    background-color: #fafafa;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; 
+  }
+  .navbar-brand img{
+    width: 132px;
+  }
+  
+  body {
+    padding-top: 70px;
+  }
+}
+
+

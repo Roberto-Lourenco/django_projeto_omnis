@@ -1,0 +1,68 @@
+{% load static %}
+<!-- HEADER -->
+<header id="header-top">
+  <nav class="navbar navbar-expand-md nav-container">
+    <div class="container-fluid col-xxl-10 px-lg-4 d-flex align-items-center justify-content-between">
+
+      <!-- LOGO -->
+      <a class="navbar-brand" href="{% url 'home'%}">
+        <picture>
+          <img src="{% static 'img/headerlogo.svg' %}" alt="Logo da Omnis" class="d-inline-block" />
+        </picture>
+      </a>
+
+      <!-- MENU DE NAVEGAÇÃO (colapsável) -->
+      <div class="collapse navbar-collapse justify-content-center py-4" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link" aria-current="page" href="{% url 'home'%}">Início</a>
+          <a class="nav-link" href="{% url 'planos'%}">Planos</a>
+          <a class="nav-link" href="{% url 'servicos'%}">Serviços</a>
+        </div>
+      </div>
+
+      <!-- AÇÕES À DIREITA: botão menu + dropdown perfil -->
+      <div class="d-flex align-items-center gap-2">
+
+        <!-- BOTÃO HAMBURGUER (visível em telas pequenas) -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars menu-hamburguer"></i>
+        </button>
+
+        <!-- PERFIL OU LOGIN -->
+        {% if user.is_authenticated %}
+        <div class="dropdown-custom" id="dropdown">
+          <div class="dropdown-profile" onclick="toggleDropdown()">
+            <div class="dropdown-names d-none d-md-block text-end me-2">
+              <h6>{{ user.nome_capitalize }}</h6>
+              <small>Cliente</small>
+            </div>
+            <div class="dropdown-image">
+              <img src="{% static 'img/default_profile.png' %}" alt="Perfil">
+            </div>
+          </div>
+
+          <ul class="dropdown-list" id="dropdownMenu">
+            <li>
+              <a class="dropdown-item" href="{% url 'usuarios:perfil' %}">
+                <i class="ri-user-line me-2"></i> Perfil
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'usuarios:logout' %}">
+                <i class="ri-logout-box-r-line me-2"></i> Sair
+              </a>
+            </li>
+          </ul>
+        </div>
+        {% else %}
+        <button class="btn-cotacao-header" onclick="window.location.href='{% url 'usuarios:login' %}'">
+          Área do cliente
+        </button>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script src="{% static 'js/header.js' %}"></script>

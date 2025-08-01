@@ -1,0 +1,171 @@
+{% extends "global/base.html" %}
+{% block title %}
+  Resultado da cotação
+{% endblock title %}
+{% block main %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/resultadoCotacao.css' %}" />
+  <main>
+    <section id="resultado" class="container col-xxl-8 px-4 py-5">
+      <article class="resultado-header mb-5">
+        <h2 class="display-5">Olá {{ primeiro_nome }},</h2>
+        <p>Aqui estão os resultados da sua cotação</p>
+      </article>
+      <article class="resultado-body">
+        <h3>Dados do Usuário</h3>
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <th scope="row">Nome</th>
+              <td>{{ cotacao.nome }}</td>
+            </tr>
+            <tr>
+              <th scope="row">CPF</th>
+              <td>{{ cotacao.cpf }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Data de Nascimento</th>
+              <td>{{ cotacao.data_nascimento|date:"d/m/Y" }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Telefone</th>
+              <td>{{ cotacao.telefone }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <h4>Endereço</h4>
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <th scope="row">CEP</th>
+              <td>{{ cotacao.cep }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Logradouro</th>
+              <td>{{ cotacao.logradouro }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Bairro</th>
+              <td>{{ cotacao.bairro }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Cidade</th>
+              <td>{{ cotacao.cidade }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Estado</th>
+              <td>{{ cotacao.uf }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 class="mt-5">Veículo Cotado</h3>
+        <div class="row">
+          <div>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th scope="row">Marca</th>
+                  <td>{{ cotacao.marca_veiculo }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Modelo</th>
+                  <td>{{ cotacao.modelo_veiculo }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Ano</th>
+                  <td>{{ cotacao.ano_veiculo }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Versão</th>
+                  <td>{{ cotacao.versao_veiculo }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+    </section>
+    <section id="precos" class="container col-xxl-8 px-4">
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Preços e Planos</h3>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">Plano</th>
+                  <th scope="col">Preço Anual</th>
+                  <th scope="col">Cobertura</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for plano in planos_com_valor %}
+                  <tr>
+                    <td>{{ plano.nome }}</td>
+                    <td>R$ {{ plano.valor_calculado|floatformat:2 }}</td>
+                    <td>{{ plano.descricao }}</td>
+                  </tr>
+                {% empty %}
+                  <tr>
+                    <td colspan="3">Nenhum plano disponível.</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+                <a href="{% url 'gerar_pdf_cotacao' cotacao.id %}"
+       class="btn btn-primary"
+       target="_blank">📄 Baixar PDF da Cotação</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta container col-xxl-8 px-4 py-5">
+      <header class="cta-header">
+        <h2>Gostou dos resultados?</h2>
+        <p>
+          Estamos à disposição para tirar suas dúvidas ou fornecer mais informações sobre sua cotação. Entre em contato agora!
+        </p>
+      </header>
+      <article class="cta-body">
+        <div class="sac-tel">
+          <h4>Central de Atendimento</h4>
+          <p>
+            <a href="tel:+40028922"><strong>4002 8922</strong></a>: Capitais e regiões metropolitanas.
+          </p>
+          <p>
+            <a href="tel:+08001012222"><strong>0800 101 2222</strong></a>: Demais localidades.
+          </p>
+          <p>
+            <a href="tel:+08001024444"><strong>0800 102 4444</strong></a>: Pessoas com deficiência auditiva e de fala.
+          </p>
+          <h5>Horário de Atendimento</h5>
+          <ul>
+            <li>
+              <strong>Segunda a Sexta:</strong> 09:00 - 18:00
+            </li>
+            <li>
+              <strong>Sábado:</strong> 09:00 - 13:00
+            </li>
+            <li>
+              <strong>Domingo:</strong> Fechado
+            </li>
+          </ul>
+        </div>
+        <div class="sac-whatsapp">
+          <h4>Fale Conosco pelo WhatsApp</h4>
+          <p>
+            Se preferir, entre em contato diretamente com nosso atendimento via WhatsApp para uma cotação rápida e personalizada!
+          </p>
+          <a href="https://wa.me/5521999999999"
+             class="btn btn-success"
+             target="_blank">
+            <i class="fab fa-whatsapp"></i> Conversar pelo WhatsApp
+          </a>
+        </div>
+      </article>
+    </section>
+  </main>
+  <script src="{% static 'js/cotacao/resultadoCotacao.js' %} "></script>
+  <script type="module" src="{% static 'js/cotacao/calculadora.js' %} "></script>
+{% endblock main %}

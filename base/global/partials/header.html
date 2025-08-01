@@ -1,0 +1,166 @@
+{% load static %}
+
+
+
+<!--=============== REMIXICONS ===============-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.5.0/remixicon.css">
+
+<!--=============== CSS ===============-->
+<link rel="stylesheet" href="{% static 'css/header.css' %}"">
+
+
+<div class=" no-bootstrap-header">
+<!--==================== HEADER ====================-->
+<header class="header">
+  <nav class="nav header-container">
+    <a href="{% url 'home'%}" class="nav__logo"><img src="{% static 'img/headerlogo.svg' %}" alt=""></a>
+
+    <div class="nav__menu" id="nav-menu">
+      <ul class="nav__list">
+        <li>
+          <a href="{% url 'home'%}" class="nav__link">Início</a>
+        </li>
+
+        <li>
+          <a href="{% url 'servicos'%}" class="nav__link">Serviços</a>
+        </li>
+
+        <li>
+          <a href="{% url 'planos'%}" class="nav__link">Planos</a>
+        </li>
+      </ul>
+
+      <!-- Close button -->
+      <div class="nav__close" id="nav-close">
+        <i class="ri-close-large-line"></i>
+      </div>
+    </div>
+
+    <div class="nav__actions">
+      <!-- Dropdown -->
+      <div class="dropdown" id="dropdown">
+        {% if user.is_authenticated %}
+        <div class="dropdown__profile">
+          <div class="dropdown__names">
+            <h3>{{ user.nome_capitalize }}</h3>
+            <span>{{ user.tipo_capitalize }}</span>
+          </div>
+
+          {% if user.genero == 'M' %}
+          <div class="dropdown__image male_user">
+            <img src="{% static 'img/user_male.png' %}" alt="Icone de perfil masculino">
+          </div>
+          {% else %}
+          <div class="dropdown__image female_user">
+            <img src="{% static 'img/user_female.png' %}" alt="Icone de perfil feminino">
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="dropdown__list">
+          <div class="dropdown__names_small_screen">
+            <h3>{{ user.nome_capitalize }}</h3>
+            <span>{{ user.tipo_capitalize }}</span>
+            <hr>
+          </div>
+          <a href="{% url 'usuarios:perfil' %}" class="dropdown__link">
+            <i class="ri-user-line"></i>
+            <span>Meu perfil</span>
+          </a>
+
+          <a href="{% url 'contato' %}" class="dropdown__link">
+            <i class="ri-customer-service-2-line"></i>
+            <span>Suporte</span>
+          </a>
+
+          <a href="{% url 'usuarios:logout' %}" class="dropdown__link">
+            <i class="ri-logout-box-r-line"></i>
+            <span>Sair</span>
+          </a>
+        </div>
+      </div>
+      {% else %}
+      <div class="dropdown__profile">
+        <div class="dropdown__names">
+          <h3>Área do Cliente</h3>
+          <span>Entrar / Cadastrar</span>
+        </div>
+
+        <div class="dropdown__image default_user">
+          <img src="{% static 'img/user.png' %}" alt="Icone de visitante">
+        </div>
+      </div>
+
+      <div class="dropdown__list">
+        <div class="dropdown__names_small_screen">
+          <h3>Área do Cliente</h3>
+          <hr>
+        </div>
+        <a href="{% url 'usuarios:login' %}" class="dropdown__link">
+          <i class="ri-login-box-line"></i>
+          <span>Entrar</span>
+        </a>
+
+        <a href="{% url 'usuarios:redirecionar_cadastro' %}" class="dropdown__link">
+          <i class="ri-pass-pending-line"></i>
+          <span>Cadastrar</span>
+        </a>
+
+        <a href="{% url 'contato' %}" class="dropdown__link">
+          <i class="ri-customer-service-2-line"></i>
+          <span>Suporte</span>
+        </a>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Toggle button -->
+    <div class="nav__toggle" id="nav-toggle">
+      <i class="ri-menu-line"></i>
+    </div>
+    </div>
+  </nav>
+</header>
+</div>
+
+
+{% if user.is_authenticated and user.tipo_usuario != 'cliente' %}
+<!-- Icone flutuante -->
+<div class="cotacao-fab" id="cotacaoFab">
+  <img src="{% static 'img/protection.png' %}" alt="">
+</div>
+<!-- Incentivo -->
+<div class="cotacao-hint-wrapper" id="cotacaoHintWrapper">
+  <div class="cotacao-avatar">
+    <img src="{% static 'img/jessica_avatar.jpg' %}" alt="Jéssica, assistente virtual" />
+  </div>
+  <div class="cotacao-hint" id="cotacaoHint">
+    <p>👋 Ei! Que tal proteger seu carro agora? Clique aqui e faça uma cotação gratuita!</p>
+  </div>
+</div>
+
+
+<!-- Caixa estilo chatbot -->
+<div class="cotacao-chatbox hidden" id="cotacaoChat">
+  <div class="chat-avatar">
+    <img src="{% static 'img/jessica_avatar.jpg' %}" alt="Atendente Jéssica">
+  </div>
+  <div class="chat-content">
+    <p><strong>Oi! Eu sou a Jéssica 😊</strong></p>
+    <p>Você ainda não protegeu seu carro?</p>
+      <p>Aqui na <strong>Omnis</strong> temos planos sob medida pra você!</p>
+    <p>Leva menos de 1 minuto pra fazer sua cotação. Vamos nessa?</p>
+    <a href="{% url 'home' %}" class="chat-btn">Fazer Cotação Agora</a>
+  </div>
+</div>
+
+<!-- Caixas de mensagens -->
+{% endif %}
+
+
+
+<!--=============== MAIN JS ===============-->
+<script>
+  const clickSoundSrc = "{% static 'sounds/click.mp3' %}";
+</script>
+<script src="{% static 'js/header.js' %}"></script>

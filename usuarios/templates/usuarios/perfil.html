@@ -1,0 +1,116 @@
+{% extends 'global/base.html' %}
+{% block title %}Perfil - {{user.nome_capitalize}}{% endblock %}
+{% block main %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/usuarios/perfil.css' %}" />
+    <main class="container">
+        <div class="row">
+            <div class="col-12">
+                <form class="file-upload my-5 p-3">
+                    <div class="row mb-5 gx-5">
+                        <div class="text-center">
+                            <h3>Meu perfil</h3>
+                            <hr>
+                        </div>
+                        <!-- Dados do perfil -->
+                        <div class="col-xxl-12 mb-5 mb-xxl-0">
+                            <div class="bg-secondary-soft px-4 py-5 rounded">
+                                <div class="row g-3">
+                                    <h4 class="mb-4 mt-0">Meus dados</h4>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Nome completo *</label>
+                                        <input type="text"
+                                               class="form-control campo-perfil"
+                                               name="nome_completo"
+                                               id="nome_completo"
+                                               value="{{ perfil.nome_completo }}"
+                                               readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Número de telefone *</label>
+                                        <input type="text"
+                                               class="form-control campo-perfil"
+                                               name="telefone"
+                                               id="telefone"
+                                               value="{{ perfil.telefone }}"
+                                               readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputEmail4" class="form-label">Email *</label>
+                                        <input type="email"
+                                               class="form-control campo-perfil"
+                                               name="email"
+                                               id="email"
+                                               value="{{ perfil.email }}"
+                                               readonly>
+                                    </div>
+                                    {% if tipo_perfil == 'pf' %}
+                                        <div class="col-md-6">
+                                            <label for="identidade" class="form-label">CPF *</label>
+                                            <input type="text"
+                                                class="form-control"
+                                                id="identidade"
+                                                value="{{ perfil.cpf }}"
+                                                readonly>
+                                        </div>
+                                    {% elif tipo_perfil == 'pj' %}
+                                        <div class="col-md-6">
+                                            <label for="identidade" class="form-label">CNPJ *</label>
+                                            <input type="text"
+                                                class="form-control"
+                                                id="identidade"
+                                                value="{{ perfil.cnpj }}"
+                                                readonly>
+                                        </div>
+                                    {% else %}
+                                        <div class="col-md-6">
+                                            <label class="form-label">Documento não disponível</label>
+                                        </div>
+                                    {% endif %}
+
+                                <div class="buttons-container mt-4">
+                                    <a href="{% url 'usuarios:adicionar_endereco' %}"
+                                       class="btn btn-success me-2 mt-3">Adicionar Endereço</a>
+                                    <a href="{% url 'usuarios:editar_perfil' %}" class="btn btn-primary mt-3">Editar Perfil</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Endereços -->
+                        <div class="col-xxl-12">
+                            <div class="bg-secondary-soft px-4 py-5 rounded">
+                                <h4 class="mb-4">Meus Endereços</h4>
+                                <ul class="list-group">
+                                    {% for endereco in enderecos %}
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            {{ endereco }}
+                                            <div class="btn-group">
+                                                <a href="{% url 'usuarios:editar_endereco' endereco.pk %}"
+                                                   class="btn btn-sm btn-primary">Editar</a>
+                                                <a href="{% url 'usuarios:deletar_endereco' endereco.pk %}"
+                                                   class="btn btn-sm btn-danger ms-2">Excluir</a>
+                                            </div>
+                                        </li>
+                                    {% empty %}
+                                        <li class="list-group-item">Nenhum endereço cadastrado.</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Seguros contratados -->
+                        <div class="col-xxl-12">
+                            <div class="bg-secondary-soft px-4 py-5 rounded">
+                                <h4 class="mb-4">Meus Seguros</h4>
+                                <ul class="list-group">
+                                </li>
+                                <li class="list-group-item">Nenhum seguro contratado.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+
+{% endblock main %}

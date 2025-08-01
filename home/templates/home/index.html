@@ -1,0 +1,526 @@
+{% extends "global/base.html" %}
+{% block title %} Omnis - Página inicial{% endblock title %}
+{% block main %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+  <!-- MAIN -->
+  <main>
+    {% if form.errors %}
+      <div class="alert alert-danger mb-3 text-center">
+        <strong>Corrija os seguintes erros:</strong>
+        <ul>
+          {% for field in form %}
+            {% for error in field.errors %}<li>{{ field.label }}: {{ error }}</li>{% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+    <section id="hero" class="hero">
+      <!-- BANNER DE FUNDO - HERO SECTION -->
+      <article id="cta"
+               class="cta"
+               style="background: url('') center/cover no-repeat">
+        <div class="container col-xxl-10 px-4 py-5">
+          <div class="row d-flex flex-lg-row-reverse flex-column-reverse align-items-center g-5 py-2">
+            <section class="col-12 col-sm-12 col-lg-6 container-form">
+              <form action="{% url 'home' %}"
+                    method="post"
+                    id="form-cotacao"
+                    class="form-hero p-4">
+                {% csrf_token %}
+                <!-- Mensagens de erro -->
+                <h2 class="mb-2 title-cotacao">Cotação gratuita</h2>
+                <!-- Nome -->
+                <div class="mb-3 input-group">
+                  <i class="fa-solid fa-user"></i>
+                  <input type="text"
+                         id="name"
+                         name="nome"
+                         class="form-control"
+                         placeholder="Nome Completo"
+                         value="{{ form.nome.value|default:'' }}"
+                         required />
+                </div>
+                <!-- CPF -->
+                <div class="mb-3 input-group">
+                  <i class="fa-solid fa-id-card"></i>
+                  <input type="text"
+                         id="cpf"
+                         name="cpf"
+                         class="form-control"
+                         placeholder="CPF"
+                         value="{{ form.cpf.value|default:'' }}"
+                         required
+                         maxlength="14" />
+                  <small id="cpfError" class="error-input" style="display:none;">CPF inválido.</small>
+                  <input type="hidden" id="logradouro" name="logradouro">
+                  <input type="hidden" id="bairro" name="bairro">
+                  <input type="hidden" id="cidade" name="cidade">
+                  <input type="hidden" id="uf" name="uf">
+                </div>
+                <!-- Data de nascimento -->
+                <div class="mb-3 input-group">
+                  <i class="fas fa-birthday-cake"></i>
+                  <input type="date"
+                         id="dataNasc"
+                         name="data_nascimento"
+                         class="form-control"
+                         value="{{ form.data_nascimento.value|default:'' }}"
+                         placeholder="Data de Nascimento"
+                         required
+                         min="1910-01-01"
+                         max="2007-01-01" />
+                </div>
+                <!-- Telefone -->
+                <div class="mb-3 input-group">
+                  <i class="fa-solid fa-mobile-screen-button"></i>
+                  <input type="text"
+                         id="telefone"
+                         name="telefone"
+                         class="form-control"
+                         placeholder="Telefone"
+                         value="{{ form.telefone.value|default:'' }}"
+                         required
+                         maxlength="15" />
+                </div>
+                <!-- CEP -->
+                <div class="mb-3 input-group">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <input type="text"
+                         id="cep"
+                         name="cep"
+                         class="form-control"
+                         placeholder="CEP"
+                         value="{{ form.cep.value|default:'' }}"
+                         required
+                         maxlength="9" />
+                  <small id="cepError" class="error-input" style="display:none;">CEP inválido.</small>
+                </div>
+                <!-- Marca -->
+                <div class="mb-3 input-group">
+                  <i class="fas fa-car"></i>
+                  <select id="id_marca"
+                          name="marca_veiculo"
+                          class="form-select"
+                          required
+                          data-selected-value="{{ form.marca_veiculo.value|default:'' }}">
+                    <option value="">Marca do veículo</option>
+                    {% for marca in marcas %}
+                      <option value="{{ marca.nome }}"
+                              {% if form.marca_veiculo.value == marca.nome %}selected{% endif %}>
+                        {{ marca.nome }}
+                      </option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <!-- Modelo -->
+                <div class="mb-3 input-group">
+                  <i class="fas fa-car-side"></i>
+                  <select id="id_modelo"
+                          name="modelo_veiculo"
+                          class="form-select"
+                          required
+                          data-selected-value="{{ form.modelo_veiculo.value|default:'' }}">
+                    <option value="">Modelo do veículo</option>
+                    {% if form.modelo_veiculo.value %}
+                      <option value="{{ form.modelo_veiculo.value }}" selected>{{ form.modelo_veiculo.value }}</option>
+                    {% endif %}
+                  </select>
+                </div>
+                <!-- Ano -->
+                <div class="mb-3 input-group">
+                  <i class="fas fa-calendar-alt"></i>
+                  <select id="id_ano" name="ano_veiculo" class="form-select" required>
+                    <option value="">Ano do veículo</option>
+                    {% if form.ano_veiculo.value %}
+                      <option value="{{ form.ano_veiculo.value }}" selected>{{ form.ano_veiculo.value }}</option>
+                    {% endif %}
+                  </select>
+                </div>
+                <!-- Versão -->
+                <div class="mb-3 input-group">
+                  <i class="fas fa-tags"></i>
+                  <select id="id_versao"
+                          name="versao_veiculo"
+                          class="form-select"
+                          required
+                          data-selected-value="{{ form.versao_veiculo.value|default:'' }}">
+                    <option value="">Versão do veículo</option>
+                    {% if form.versao_veiculo.value %}
+                      <option value="{{ form.versao_veiculo.value }}" selected>{{ form.versao_veiculo.value }}</option>
+                    {% endif %}
+                  </select>
+                </div>
+                <!-- Termos -->
+                <div class="input-group">
+                  <input type="checkbox"
+                         id="termos"
+                         name="termos_aceitos"
+                         {% if form.termos_aceitos.value %}checked{% endif %}
+                         required />
+                  <label class="termos-label" for="termos">
+                    Li e concordo com os
+                    <a href="#" id="termsLink">Termos de aceite</a> e
+                    <a href="#" id="policyLink">Política de privacidade</a>
+                  </label>
+                </div>
+                <!-- Botão enviar -->
+                <button type="submit" class="btn w-100 btn-submit" style="height: 48px;">Enviar</button>
+              </form>
+            </section>
+            <!-- Texto e botões Hero Section -->
+            <section class="col-lg-6 text-hero">
+              <h1 class="display-4 fw-bold lh-1 mb-3 title-hero">
+                Proteja quem você ama com a melhor <span class="span-title-hero">cobertura</span>
+              </h1>
+              <img class="vetor-hero"
+                   id="vetor-hero"
+                   src="{% static 'img/vetor_hero2.png' %}"
+                   alt="Imagem de um veiculo azul com um escudo e pessoas ao seu redor.">
+              <p class="lead lh-2 mb-4 description-hero">
+                Oferecemos planos completos e personalizados para sua tranquilidade e segurança.
+              <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <button type="button"
+                        class="btn-contact px-3"
+                        onclick="window.location.href='{% url 'contato' %}'">Fale conosco</button>
+              </div>
+            </section>
+          </div>
+        </div>
+      </article>
+    </section>
+    <!-- Cards Beneficios -->
+    <section id="features" class="features">
+      <div class="container px-4 py-5" id="featured-3">
+        <h2 class="pb-1 border-bottom">Benefícios Omnis</h2>
+        <!-- Accordion para v. mobile-->
+        <article id="features-mobile">
+          <div class="accordion d-block d-lg-none" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne"
+                        aria-expanded="true"
+                        aria-controls="collapseOne">Proteção Completa</button>
+              </h2>
+              <div id="collapseOne"
+                   class="accordion-collapse collapse show"
+                   aria-labelledby="headingOne"
+                   data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="card">
+                    <img src="{% static 'img/car_protection.gif' %}"
+                         class="card-img-top"
+                         alt="Desenho de um carro com um escudo azul na frente"
+                         style="width: 200px;
+                                height: 200px;
+                                object-fit: cover;
+                                margin: 0 auto">
+                    <div class="card-body text-center">
+                      <p class="card-text">
+                        Com nossos planos, você está coberto contra roubo, colisões e danos a
+                        terceiros. Oferecemos a máxima proteção para o seu veículo e sua tranquilidade.
+                      </p>
+                      <a href="{% url 'planos' %}" class="btn btn-primary">Saiba mais</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo"
+                        aria-expanded="false"
+                        aria-controls="collapseTwo">Assistência 24h</button>
+              </h2>
+              <div id="collapseTwo"
+                   class="accordion-collapse collapse"
+                   aria-labelledby="headingTwo"
+                   data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="card">
+                    <img src="{% static 'img/24-7.gif' %}"
+                         class="card-img-top"
+                         alt="Desenho de um telefone com o numero 24 ao centro"
+                         style="width: 200px;
+                                height: 200px;
+                                object-fit: cover;
+                                margin: 0 auto">
+                    <div class="card-body text-center">
+                      <p class="card-text">
+                        Em qualquer emergência, nossa assistência 24 horas está pronta para ajudar.
+                        Atendimento rápido e eficaz para te tirar de qualquer situação inesperada.
+                      </p>
+                      <a href="{% url 'contato' %}" class="btn btn-primary">Saiba mais</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree"
+                        aria-expanded="false"
+                        aria-controls="collapseThree">Descontos Exclusivos</button>
+              </h2>
+              <div id="collapseThree"
+                   class="accordion-collapse collapse"
+                   aria-labelledby="headingThree"
+                   data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="card">
+                    <img src="{% static 'img/descount.gif' %}"
+                         class="card-img-top"
+                         alt="Uma seta para baixo indicando preço baixo"
+                         style="width: 200px;
+                                height: 200px;
+                                object-fit: cover;
+                                margin: 0 auto">
+                    <div class="card-body text-center">
+                      <p class="card-text">
+                        Aproveite descontos especiais ao renovar seu seguro ou contratar novos
+                        planos. Nosso objetivo é oferecer as melhores opções para o seu bolso.
+                      </p>
+                      <a href="#" class="btn btn-primary">Saiba mais</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <!-- Cards para v. desktop -->
+        <article id="features-desktop">
+          <div class="row row-cols-1 row-cols-md-3 g-4 d-none d-lg-flex">
+            <div class="col">
+              <div class="card">
+                <img src="{% static 'img/car_protection.gif' %}"
+                     class="card-img-top"
+                     alt="Desenho de um carro com um escudo azul na frente"
+                     style="width: 200px;
+                            height: 200px;
+                            object-fit: cover;
+                            margin: 0 auto">
+                <div class="card-body text-center">
+                  <h3 class="card-title">Proteção Completa</h3>
+                  <p class="card-text">
+                    Com nossos planos, você está coberto contra roubo, colisões e danos a terceiros.
+                    Oferecemos a máxima proteção para o seu veículo e sua tranquilidade.
+                  </p>
+                  <a href="{% url 'planos' %}" class="btn btn-primary">Saiba mais</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <img src="{% static 'img/24-7.gif' %}"
+                     class="card-img-top"
+                     alt="Desenho de um telefone com o numero 24 ao centro"
+                     style="width: 200px;
+                            height: 200px;
+                            object-fit: cover;
+                            margin: 0 auto">
+                <div class="card-body text-center">
+                  <h3 class="card-title">Assistência 24h</h3>
+                  <p class="card-text">
+                    Em qualquer emergência, nossa assistência 24 horas está pronta para ajudar.
+                    Atendimento rápido e eficaz para te tirar de qualquer situação inesperada.
+                  </p>
+                  <a href="{% url 'contato' %}" class="btn btn-primary">Saiba mais</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <img src="{% static 'img/descount.gif' %}"
+                     class="card-img-top"
+                     alt="Uma seta para baixo indicando preço baixo"
+                     style="width: 200px;
+                            height: 200px;
+                            object-fit: cover;
+                            margin: 0 auto">
+                <div class="card-body text-center">
+                  <h3 class="card-title">Descontos Exclusivos</h3>
+                  <p class="card-text">
+                    Aproveite descontos especiais ao renovar seu seguro ou contratar novos planos.
+                    Nosso objetivo é oferecer as melhores opções para o seu bolso.
+                  </p>
+                  <a href="#" class="btn btn-primary">Saiba mais</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+      <!-- Porque nos escolher -->
+      <section id="quote" class="quote">
+        <div class="container my-5">
+          <article class="row p-4 pb-0 pe-lg-0 pt-lg-3 align-items-center rounded-3 border shadow-lg flex-lg-row-reverse flex-column-reverse">
+            <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+              <h2 class="display-6 fw-bold lh-1">
+                Por que escolher a Omnis? <span class="text-muted">A excelência em cada
+              detalhe.</span>
+            </h2>
+            <p class="description-quote lead my-4">
+              Estamos sempre em busca de novas tecnologias para aprimorar os nossos
+              serviços. Com uma
+              plataforma moderna e fácil de usar, oferecemos uma experiência rápida, transparente e sem complicação. Com
+              a Omnis, você tem a confiança de estar protegido com o que há de mais moderno no mercado.
+            </p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+              <a class="link-quote" href="{% url 'planos' %}">Confira nossos planos</a>
+            </div>
+          </div>
+          <aside class="col-lg-4 offset-lg-1 p-0 d-flex justify-content-center align-items-center">
+            <img class="rounded-lg-3 vetor-quote"
+                 src="{% static 'img/vetor_hero.png' %}"
+                 alt="Carro azul formato vetor">
+          </aside>
+        </article>
+      </div>
+    </section>
+
+    <!-- FAQ Perguntas Frequentes -->
+    <section id="faq" class="faq">
+      <div class="container faq-container">
+        <div class="row">
+          <section class="col-md-4 faq-left mt-md-0 mt-2 faq-header">
+            <h1>Perguntas Frequentes</h1>
+            <p>Encontre respostas para as dúvidas mais comuns sobre o Seguro Auto da Omnis.</p>
+          </section>
+          <section class="col-md-8 faq-right">
+            <div class="accordion" id="accordionExample">
+              <!-- Pergunta 1 -->
+              <article class="accordion-item">
+                <h2 class="accordion-header" id="heading1">
+                  <button class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapse1"
+                          aria-expanded="false"
+                          aria-controls="collapse1">Quais veículos podem solicitar o empréstimo Omni Renova?</button>
+                </h2>
+                <div id="collapse1"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="heading1"
+                     data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Proprietários de caminhões ou de veículos utilitários de grande porte com até 20 anos de uso podem
+                    solicitar o empréstimo Omni Renova.
+                  </div>
+                </div>
+              </article>
+              <!-- Pergunta 2 -->
+              <article class="accordion-item">
+                <h2 class="accordion-header" id="heading2">
+                  <button class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapse2"
+                          aria-expanded="false"
+                          aria-controls="collapse2">
+                    Quais são as coberturas oferecidas pelo Seguro de Auto da Omnis?
+                  </button>
+                </h2>
+                <div id="collapse2"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="heading2"
+                     data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    O Seguro de Auto da Omnis oferece diversas coberturas, incluindo danos materiais, danos corporais,
+                    roubo e furto, incêndio e colisão. Recomenda-se consultar a <a href="#">apólice</a> para detalhes
+                    específicos sobre cada cobertura.
+                  </div>
+                </div>
+              </article>
+              <!-- Pergunta 3 -->
+              <article class="accordion-item">
+                <h2 class="accordion-header" id="heading3">
+                  <button class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapse3"
+                          aria-expanded="false"
+                          aria-controls="collapse3">
+                    Como posso solicitar a assistência 24 horas incluída no seguro?
+                  </button>
+                </h2>
+                <div id="collapse3"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="heading3"
+                     data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Para acionar a assistência 24 horas, basta ligar para o número disponibilizado pela Omnis no momento
+                    da contratação do seguro. O atendimento está disponível para situações como guincho, chaveiro e
+                    socorro mecânico.
+                  </div>
+                </div>
+              </article>
+              <!-- Pergunta 4 -->
+              <article class="accordion-item">
+                <h2 class="accordion-header" id="heading4">
+                  <button class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapse4"
+                          aria-expanded="false"
+                          aria-controls="collapse4">O que é a franquia do seguro e como ela funciona?</button>
+                </h2>
+                <div id="collapse4"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="heading4"
+                     data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    A franquia é o valor que o segurado paga para acionar o seguro em caso de danos ao veículo. Por
+                    exemplo, se o conserto custa R$ 5.000 e a franquia é de R$ 1.500, o segurado paga R$ 1.500, e a
+                    Omnis cobre os R$ 3.500 restantes.
+                  </div>
+                </div>
+              </article>
+              <!-- Pergunta 5 -->
+              <article class="accordion-item">
+                <h2 class="accordion-header" id="heading5">
+                  <button class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapse5"
+                          aria-expanded="false"
+                          aria-controls="collapse5">Como posso acionar o seguro em caso de acidente?</button>
+                </h2>
+                <div id="collapse5"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="heading5"
+                     data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Em caso de acidente, entre em contato imediatamente com a central de atendimento da Omnis pelo
+                    número fornecido na sua apólice. Será necessário fornecer informações sobre o ocorrido e documentos
+                    pessoais e do veículo.
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- END MAIN -->
+  <script>
+    // Variavel global para o banner da Hero section
+    const bannerHomeUrl = "{% static 'img/banner2.png' %}";
+  </script>
+  <script src="{% static 'js/home.js' %} "></script>
+  <script src="{% static 'js/termos.js' %}"></script>
+  <script src="{% static 'js/cotacao/cotacao.js' %}"></script>
+{% endblock main %}
+
+

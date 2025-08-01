@@ -1,0 +1,318 @@
+@import url(style.css);
+
+
+/*========== Hero section ==========*/
+
+/* Container Hero section */
+article.cta{
+  background-color: var(--bg-dark);
+  height: 75vh;
+  display: flex;
+  align-items: center;
+}
+@media(max-width:992px){
+  article.cta{
+  height: fit-content;
+}
+}
+  /*===== Texto Hero =====*/
+.description-hero {
+    font-weight: 500;
+}
+
+
+  /*===== Formulario =====*/
+.form-hero {
+    width: 100%;
+    background-color: #ffffff;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.322);
+}
+
+.form-hero h2 {
+    grid-column: span 2;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: var(--primary-color);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    color: var(--text-light);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.322);
+}
+
+.vetor-hero {
+    display: none;
+}
+
+.termos-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 14px;
+}
+
+  /*===== Inputs, selects, etc... =====*/
+
+.form-hero input[type="text"],
+.form-hero input[type="email"],
+.form-hero input[type="date"],
+.form-hero select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+    padding-left: 35px;
+    background-color: #fff;
+    height: 45px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border-radius: 0 6px 6px 0 !important;
+}
+
+.form-hero input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.form-hero input:focus,
+.form-hero select:focus {
+    box-shadow: 0 0 4px var(--primary-color);
+}
+
+.form-hero .input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+  /*===== Icone dentro do input =====*/
+.form-hero .input-group i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    z-index: 50;
+}
+  /* -- */
+
+.error-input {
+    color: red;
+    position: absolute;
+    top: 100%;
+    left: 10px;
+}
+
+  /* Padding no input para inserir o icone */
+.form-hero .input-group input,
+.form-hero .input-group select {
+    padding-left: 35px;
+}
+  /* -- */
+
+/*========== Features ==========*/
+
+  /*===== Accordion =====*/
+.accordion-button {
+    background-color: #f8f9fa;
+    color: var(--text-dark);
+    font-weight: bold;
+    padding: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-button i{
+    color: #00aeff;
+}
+
+
+.accordion-button:not(.collapsed) {
+    background-color: white;
+    color: var(--text-dark);
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border: none;
+}
+
+.accordion-body {
+    padding: 15px;
+    background-color: #ffffff;
+    border-top: 1px solid #ddd;
+}
+
+.accordion-item {
+    margin-bottom: 10px;
+}
+
+.accordion-button[aria-expanded="true"] {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+  /*===== Cards =====*/
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+    border-bottom: 1px solid #ddd;
+    animation-play-state: paused; 
+    transition: all 0.3s ease; 
+}
+
+
+.card-img-top:hover {
+  animation-play-state: running; 
+}
+
+.card-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.card .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.card .btn-primary:hover {
+    background-color: var(--primary-color-hover);
+}
+
+  /*===== Quote =====*/
+.vetor-quote {
+    width: 100%;
+    max-width: 500px;
+    min-width: 382px;
+
+}
+
+.description-quote{
+  color: var(--text-dark);
+  font-weight: 400;
+}
+
+.link-quote {
+    border: 1px solid #88888850;
+    font-weight: 500;
+    padding: 16px;
+    background-color: var(--primary-color-hover);
+    color: var(--text-light);
+    border-radius: 8px;
+    font-size: 1.2rem;
+    transition: 0.5s;
+    text-decoration: none;
+}
+
+.link-quote:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+  
+/*========== Media queries ==========*/
+  @media (min-width: 993px) {
+    .description-hero {
+      color: #fff;
+      font-size: 1.5rem;
+    }
+    .title-hero {
+      color: #fff;
+    }
+    .span-title-hero {
+      color: #0fffcb;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .title-hero {
+      background: linear-gradient(15deg, #00aeff 10%, #01bb64 60%);
+      background-clip: text;
+      color: transparent;
+      font-size: 2.3rem;
+    }
+    .cta {
+      color: var(--bg-dark);
+    }
+    .description-hero {
+      font-size: 1.2rem;
+    }
+    .form-hero h2{
+      font-size: 1.2rem;
+    }
+  
+    .vetor-hero {
+      display: block;
+      width: 100%;
+    }
+  
+    .form-hero {
+      grid-template-columns: 1fr;
+      background-color: white;
+    }
+  
+    .form-hero h2 {
+      grid-column: span 1;
+    }
+    .title-cotacao{
+      font-size: 1rem;
+    }
+    .link-quote{
+      text-align: center;
+      font-size: 1.2em;
+      padding: 14px;
+    }
+
+    .btn-contact {
+      width: 100%;
+      background-color: var(--primary-color);
+    }
+  }
+  @media (max-width:768px){
+    
+    body {
+      padding-top: 40px; 
+    }
+  }
+  @media (max-width: 568px) {
+    .vetor-quote{
+      min-width: 0;
+      width: 100%;
+    }
+  }

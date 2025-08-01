@@ -1,0 +1,116 @@
+{% extends 'global/base.html' %}
+{% block title %}
+    {% if object %}
+        Editar
+    {% else %}
+        Adicionar
+    {% endif %}
+    Endereço
+{% endblock %}
+{% block main %}
+    {% load static %}
+    {% load widget_tweaks %}
+    <link rel="stylesheet" href="{% static 'css/usuarios/perfil.css' %}" />
+    <main class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8 mt-4 file-upload">
+                <div class="my-3 text-center">
+                    <h3>
+                        {% if object %}
+                            Editar
+                        {% else %}
+                            Adicionar
+                        {% endif %}
+                        Endereço
+                    </h3>
+                    <hr>
+                </div>
+                <div class="bg-secondary-soft px-4 py-3 rounded">
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            {% for field in form %}
+                                <div class="col-md-6">
+                                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                                    {% if field.name == 'principal' %}
+                                        <div class="form-check">
+                                            {{ field|add_class:"form-check-input" }}
+                                            <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                        </div>
+                                    {% else %}
+                                        {{ field|add_class:"form-control" }}
+                                    {% endif %}
+                                    {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+                                    {% for error in field.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="d-flex  mt-3">
+                            <a href="{% url 'usuarios:perfil' %}" class="btn btn-danger-soft">Cancelar</a>
+                            <button type="submit" class="mx-3 btn btn-success-soft">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const cepInput = document.getElementById('id_cep');
+    const logradouroInput = document.getElementById('id_logradouro');
+    const bairroInput = document.getElementById('id_bairro');
+    const cidadeInput = document.getElementById('id_cidade');
+    const estadoInput = document.getElementById('id_estado');
+
+    // Cria div de erro, se não existir
+    let cepError = document.getElementById('cep-error');
+    if (!cepError) {
+      cepError = document.createElement('div');
+      cepError.id = 'cep-error';
+      cepError.style.display = 'none';
+      cepError.className = 'text-danger small mt-1';
+      cepInput.parentNode.appendChild(cepError);
+    }
+
+    // Evento de digitação no campo de CEP
+    cepInput.addEventListener('input', function (e) {
+      let cep = e.target.value.replace(/\D/g, '');
+
+      // Formata CEP com hífen
+      if (cep.length > 5) {
+        cep = cep.replace(/^(\d{5})(\d)/, '$1-$2');
+      }
+      e.target.value = cep;
+
+      // Se tiver 8 dígitos, busca no ViaCEP
+      if (cep.replace(/\D/g, '').length === 8) {
+        pesquisacep(cep.replace(/\D/g, ''));
+      }
+    });
+
+    // Função que injeta o script do ViaCEP
+    function pesquisacep(cep) {
+      const script = document.createElement('script');
+      script.src = `https://viacep.com.br/ws/${cep}/json/?callback=meuCallback`;
+      document.body.appendChild(script);
+    }
+
+    // Callback do ViaCEP
+    window.meuCallback = function (conteudo) {
+      if (!("erro" in conteudo)) {
+        logradouroInput.value = conteudo.logradouro || '';
+        bairroInput.value = conteudo.bairro || '';
+        cidadeInput.value = conteudo.localidade || '';
+        estadoInput.value = conteudo.uf || '';
+        cepError.style.display = 'none';
+      } else {
+        cepError.style.display = 'block';
+        cepError.textContent = "CEP não encontrado";
+      }
+    };
+  });
+</script>
+
+
+
+{% endblock main %}

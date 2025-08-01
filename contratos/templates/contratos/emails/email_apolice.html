@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Apólice Omnis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      background-color: #ffffff;
+      max-width: 600px;
+      margin: 30px auto;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      padding: 30px;
+    }
+
+    .header {
+      text-align: center;
+      background-color: #1a73e8;
+      padding: 20px;
+      color: #fff;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: 1px;
+    }
+
+    .content {
+      padding: 20px 0;
+    }
+
+    .content p {
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .dados-usuario {
+      background-color: #f0f4ff;
+      padding: 15px;
+      border-left: 4px solid #1a73e8;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    }
+
+    .coberturas {
+      margin: 20px 0;
+    }
+
+    .coberturas ul {
+      padding-left: 20px;
+    }
+
+    .footer {
+      font-size: 13px;
+      color: #777;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .logo {
+      max-width: 100px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <img src="{% static 'img/headerlogo.svg' %}" alt="Logo Omnis" class="logo" />
+      <h1>Apólice de Seguro Veicular</h1>
+    </div>
+
+    <div class="content">
+      <p>Olá, <strong>{{ usuario.nome_completo }}</strong>!</p>
+
+      <div class="dados-usuario">
+        <p><strong>Número da Apólice:</strong> {{ numero_apolice }}</p>
+        <p><strong>Plano contratado:</strong> {{ plano }}</p>
+        <p><strong>Email:</strong> {{ usuario.email }}</p>
+        <p><strong>Telefone:</strong> {{ usuario.telefone }}</p>
+      </div>
+
+      <div class="coberturas">
+        <p><strong>Coberturas inclusas:</strong></p>
+        <ul>
+          {% for cobertura in coberturas %}
+            <li>{{ cobertura }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <p>Obrigado por confiar na <strong>Omnis Seguros</strong>. Estamos sempre aqui para proteger o que é importante para você.</p>
+    </div>
+
+    <div class="footer">
+      &copy; {{ now|date:"Y" }} Omnis Seguros. Todos os direitos reservados.<br>
+      Este é um e-mail automático. Não responda diretamente.
+    </div>
+  </div>
+
+</body>
+</html>
+
+

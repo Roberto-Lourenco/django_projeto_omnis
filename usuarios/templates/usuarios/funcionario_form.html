@@ -1,0 +1,19 @@
+{% extends 'global/base.html' %}
+
+{% block title %}{% if object %}Editar{% else %}Cadastrar{% endif %} Funcionário{% endblock %}
+
+{% block main %}
+<main>
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h2>{% if object %}Editar{% else %}Cadastrar{% endif %} Funcionário</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="{% url 'usuarios:lista_funcionarios' %}" class="btn btn-secondary">Voltar</a>
+        </form>
+    </div>
+</div>
+</main>
+{% endblock main %}

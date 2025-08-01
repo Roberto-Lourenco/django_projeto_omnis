@@ -1,0 +1,138 @@
+@import url(styles.css);
+@import url(footerHeader.css);
+
+
+/*========== Hero section ==========*/
+.hero-services{
+    padding: 20px 0;
+    background-color: #f8f8f8;
+    border: 1px solid #8888883f;
+}
+.hero-services h2, p{
+    color: var(--text-dark);
+}
+
+.hero-services img{
+    width: 100%;
+    height: 350px;
+    object-fit: contain;
+    transition: transform .3s;
+}
+.hero-services img:hover{
+    transform: translateY(-4px);
+}
+
+
+
+/*========== Serviços ==========*/
+.services{
+    background-color: #f3f3f3;
+    h2{
+        color: var(--text-dark);
+    }
+}
+
+    /*===== Cards serviços =====*/
+.card-body{
+    height: 320px;
+    min-height: 250px;
+}
+
+.items-services{
+    display: flex;
+    transition: all .3s ease-in-out;
+    border: none;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);
+}
+.items-services:hover{
+    transform: translateY(-8px);
+}
+
+.items-services h4, p{
+    color: var(--text-dark);
+}
+
+.icon-cards{
+    font-size: 1.4em;
+    width: 100%;
+    color: var(--primary-color-hover);
+    margin-bottom: 8px;
+}
+
+/*========== Accordion services ==========*/
+    /*===== Accordion =====*/
+.accordion-button {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    padding: 15px;
+    transition: background-color 0.3s ease;
+    border-radius: 20px 20px 2px 2px;
+}
+
+.accordion-button h6{
+    font-size: 1.1em;
+    color: var(--text-dark);
+}
+.accordion-button i{
+    font-size: 1.3em;
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+
+
+.accordion-button:not(.collapsed) {
+    background-color: white;
+    color: var(--text-dark);
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border: none;
+}
+
+.accordion-body {
+    padding: 15px;
+    background-color: #ffffff;
+    border-top: 1px solid #ddd;
+}
+
+.accordion-item {
+    margin-bottom: 10px;
+    border-radius: 20px 20px 2px 2px;
+}
+
+
+.accordion-button[aria-expanded="true"] {
+    background-color: var(--primary-color);
+    i{
+        color: #2dddc0;
+    }
+    h6{
+        color: var(--text-light);
+    }
+}
+
+/*========== Medias ==========*/
+@media (max-width: 992px) {
+    .hero-services{
+        text-align: center;
+        align-items: center;
+        justify-content:center;
+    }
+    .card-body{
+        min-height: 0;
+    }
+    .hero-services img{
+        height: 250px;
+    }
+    .btn-cotacao{
+        width: 100%;
+    }
+    
+}
+@media(max-width: 552px){
+    .hero-services img{
+        height: 250px;
+    }
+}

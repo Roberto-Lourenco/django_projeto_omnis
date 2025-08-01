@@ -1,0 +1,82 @@
+@import url(../style.css);
+/* Fundo geral da seção de login */
+.conteudo_login {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+@media(min-width:642px){
+    .conteudo_login{
+        max-width: 80vw;
+    }
+}
+
+/* Título principal */
+.conteudo_login h2 {
+    color: var(--text-dark);
+}
+
+/* Links como "Cadastre-se" ou "Esqueci a senha" */
+.conteudo_icons a {
+    color: var(--text-light);
+    text-decoration: none;
+}
+
+
+
+/* Botões sociais */
+.conteudo_login .btn-google {
+    background-color: #db4437;
+    color: white;
+    border: none;
+}
+
+.conteudo_login .btn-facebook {
+    background-color: #4267B2;
+    color: white;
+    border: none;
+}
+
+/* Ícones nos botões */
+.conteudo_login svg {
+    vertical-align: middle;
+}
+
+/* Inputs flutuantes */
+.conteudo_login .form-floating input {
+    border-radius: 8px;
+}
+
+/* Esqueceu a senha */
+.text-end a{
+    color: var(--text-dark);
+    text-decoration: none;
+}
+.text-end a:hover{
+    color: #0d6efd;
+}
+
+/* Checkbox personalizado */
+
+.form-check-label, .form-check-input{
+    cursor: pointer;
+}
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    outline: none;
+  box-shadow: none;
+
+}
+
+/* Responsividade extra para o formulário */
+@media (max-width: 768px) {
+    .conteudo_login {
+        padding: 20px;
+    }
+
+    .conteudo_login .btn-lg {
+        font-size: 1rem;
+        padding: 10px 16px;
+    }
+}

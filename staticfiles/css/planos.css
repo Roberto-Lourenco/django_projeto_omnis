@@ -1,0 +1,105 @@
+@import url(styles.css);
+@import url(footerHeader.css);
+
+
+
+/*========== Hero section ==========*/
+.pricing-header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.pricing-header-desc{
+    margin: auto;
+    font-size: 1.2em;
+    color: var(--text-dark);
+}
+
+
+
+/*========== Section planos ==========*/
+.pricing-box {
+  box-shadow: 0px 5px 30px -10px rgba(0, 0, 0, 0.2);
+  padding: 2rem 3rem;
+  border-radius: 20px;
+  background-color: #fcfcfc;
+  position: relative;
+  transition: transform .3s ease-in-out;
+  min-height: 500px;
+  align-content: center;
+}
+
+.pricing-box:hover {
+  transform: translateY(-8px);
+}
+
+.pricing-box i {
+  color: #1586c7;
+}
+
+.cards-features ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cards-features li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.cards-features i {
+  margin-right: 8px;
+}
+
+  /*===== Mais vendidos =====*/
+ .pricing-badge {
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  right: 0;
+  width: 100%;
+  display: block;
+  font-size: 15px;
+  padding: 0;
+  overflow: hidden;
+  height: 100px;
+}
+
+.pricing-badge .badge {
+  float: right;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  right: -60px;
+  top: 25px;
+  position: relative;
+  text-align: center;
+  width: 200px;
+  font-size: 13px;
+  margin: 0;
+  padding: 7px 10px;
+  font-weight: 500;
+  color: #ffffff;
+  background: var(--secondary-color);
+}
+/* --- */
+
+.btn-pricing {
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  color: var(--text-light);
+  font-weight: 500;
+  transition: background-color .3s;
+}
+.btn-pricing:hover{
+  background-color: var(--primary-color-hover);
+}
+
+
+
+

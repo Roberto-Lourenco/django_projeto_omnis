@@ -1,0 +1,172 @@
+@import url(styles.css);
+@import url(footerHeader.css);
+
+
+/*========== Hero section ==========*/
+.hero-services{
+    height: auto;
+    padding: 20px 0;
+    background-color: #f8f8f8;
+    border: 1px solid #8888883f;
+    display: flex;
+    align-items: center;
+}
+@media(max-width:992px){
+  .hero-services{
+  height: fit-content;
+}
+}
+
+.hero-services h2, p{
+    color: var(--text-dark);
+}
+
+.hero-services img{
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+    transition: transform .3s;
+    border-radius: 50px;
+}
+
+.overlay-bg{
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+.hero-services img:hover{
+    transform: translateY(-4px);
+}
+
+
+
+/*========== Serviços ==========*/
+.services{
+    background-color: #f3f3f3;
+    h2{
+        color: var(--text-dark);
+    }
+}
+
+    /*===== Cards serviços =====*/
+.card-body{
+    height: auto;
+    min-height: 380px;
+}
+
+
+@media(max-width:1400px){
+    .card-body{
+    height: auto;
+    min-height: 420px;
+}
+}
+
+.items-services{
+    display: flex;
+    transition: all .3s ease-in-out;
+    border: none;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);
+}
+.items-services:hover{
+    transform: translateY(-8px);
+}
+
+.items-services h4, p{
+    color: var(--text-dark);
+}
+.items-services h4{
+    display: flex;
+    min-height: 120px;
+    flex-direction: column;
+    justify-content: center;
+}
+h4 i{
+    padding: 4px 0;
+}
+
+.icon-cards{
+    font-size: 1.8em;
+    width: 100%;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+/*========== Accordion services ==========*/
+    /*===== Accordion =====*/
+.accordion-button {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    padding: 15px;
+    transition: background-color 0.3s ease;
+    border-radius: 20px 20px 2px 2px;
+}
+
+.accordion-button h6{
+    font-size: 1.1em;
+    color: var(--text-dark);
+}
+.accordion-button i{
+    font-size: 1.3em;
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+
+
+.accordion-button:not(.collapsed) {
+    background-color: white;
+    color: var(--text-dark);
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border: none;
+}
+
+.accordion-body {
+    padding: 15px;
+    background-color: #ffffff;
+    border-top: 1px solid #ddd;
+}
+
+.accordion-item {
+    margin-bottom: 10px;
+    border-radius: 20px 20px 2px 2px;
+}
+
+
+.accordion-button[aria-expanded="true"] {
+    background-color: var(--primary-color);
+    i{
+        color: #2dddc0;
+    }
+    h6{
+        color: var(--text-light);
+    }
+}
+
+/*========== Medias ==========*/
+@media (max-width: 992px) {
+    .hero-services{
+        text-align: center;
+        align-items: center;
+        justify-content:center;
+    }
+    .card-body{
+        min-height: 0;
+    }
+    .hero-services img{
+        height: 250px;
+    }
+    .btn-cotacao{
+        width: 100%;
+    }
+    
+}
+@media(max-width: 552px){
+    .hero-services img{
+        height: 250px;
+    }
+}
